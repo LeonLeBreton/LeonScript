@@ -85,7 +85,7 @@ echo Telechargement fini
 cls
 
 :a
-set /p unsafemodechoix=Possedez vous le movable.sed propre a votre console ? (Oui=1, Non=2)
+set /p unsafemodechoix=Possedez vous le movable.sed propre a votre console ? (Oui=1, Non=2) : 
 if /I "%unsafemodechoix%"=="1" (goto :c)
 if /I "%unsafemodechoix%"=="2" (goto :b)
 cls
@@ -115,7 +115,7 @@ goto :d
 :c
 cls
 :d 
-set /p unsafemode=Renseignez le chemin precis du fichier movable.sed (Faites attention, un mauvais fichier va faire une erreur) :
+set /p unsafemode=Renseignez le chemin precis du fichier movable.sed (Faites attention, un mauvais fichier va faire une erreur) : 
 cls
 rem Obtention du fichier pour bb3 
 echo Veuillez patienter, ce processus peut prendre du temps ...
@@ -125,16 +125,16 @@ rm -r F00D43D5
 rm TADmuffin.exe
 rm movable.sed
 cls
-set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) que vous avez rentre dans le champ "Your ID0" :
-set /p unsafemodeid2=Collez ici le 2eme nom du dossier de votre console (qui fait 32 caracteres de long) qui se trouve apres l'ID0 :
+set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) que vous avez rentre dans le champ "Your ID0" : 
+set /p unsafemodeid2=Collez ici le 2eme nom du dossier de votre console (qui fait 32 caracteres de long) qui se trouve apres l'ID0 : 
 mkdir "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 move F00D43D5.bin "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
-:j
+:l
 cls
 echo Preparatif fini, copie des fichiers du pc sur la sd
 fsutil fsinfo drives
-set /p unsafemodesd=Inserez et renseignez la juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) :
-if /I "%unsafemodesd%"=="1" (goto :j)
+set /p unsafemodesd=Inserez et renseignez la juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) : 
+if /I "%unsafemodesd%"=="1" (goto :l)
 cp -r * %unsafemodesd%:\
 echo Fichier copie !
 PAUSE

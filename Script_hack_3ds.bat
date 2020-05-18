@@ -150,11 +150,11 @@ set unsafemodeinstall=
 cls
 echo Installation du hack sur la console
 echo 1. Reinserez votre carte SD dans votre 3DS
-echo 2. Allumez à present votre 3DS
+echo 2. Allumez a present votre 3DS
 echo 3. Lancez les Parametres de la console
 echo "4. Naviguez vers Gestion des donnees -> DSiWare"
 echo Attention : vos acces internet vont etre supprimes
-echo 5. Cliquez sur l’onglet Carte SD
+echo 5. Cliquez sur l'onglet Carte SD
 echo 6. Votre ecran du bas devrait clignoter en Rouge, puis la console redemarrera sur le menu HOME quelques secondes plus tard. Cela signifie que le profil exploite a ete copie avec succes
 echo 7. eteignez votre 3DS
 echo 8. Votre console toujours eteinte, maintenez enfonce les boutons suivants : (L) + (R) + (Haut sur la croix directionnelle) + (A), puis appuyez sur (Power) 

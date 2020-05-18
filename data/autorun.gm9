@@ -1,0 +1,123 @@
+set PREVIEW_MODE "LeonScript\nFait par LeonLeBreton"
+
+allow -a 0:/
+allow -a 1:/
+allow -a A:/
+
+if	not find V:/FBI.cia FBISRC
+	if	not find 0:/cias/FBI.cia FBISRC
+		if	not filesel -d "FBI.cia not found. Select manually." 0:/*.cia FBISRC
+			reboot
+		end
+		if	not ask "Is this correct?\n \n$[FBISRC]"
+
+		end
+	end
+end
+
+if	chk $[REGION] "USA"
+	if	chk $[ONTYPE] "n3ds"
+		find -f 1:/title/00040010/20021300/content/*.app H&SPATH
+	else
+		find -f 1:/title/00040010/00021300/content/*.app H&SPATH
+	end
+elif chk $[REGION] "EUR"
+	if	chk $[ONTYPE] "n3ds"
+		find -f 1:/title/00040010/20022300/content/*.app H&SPATH
+	else
+		find -f 1:/title/00040010/00022300/content/*.app H&SPATH
+	end
+elif chk $[REGION] "JPN"
+	if	chk $[ONTYPE] "n3ds"
+		find -f 1:/title/00040010/20020300/content/*.app H&SPATH
+	else
+		find -f 1:/title/00040010/00020300/content/*.app H&SPATH
+	end
+elif chk $[REGION] "KOR"
+	if	chk $[ONTYPE] "n3ds"
+		find -f 1:/title/00040010/20027300/content/*.app H&SPATH
+	else
+		find -f 1:/title/00040010/00027300/content/*.app H&SPATH
+	end
+elif chk $[REGION] "CHN"
+	if	chk $[ONTYPE] "n3ds"
+		find -f 1:/title/00040010/20026300/content/*.app H&SPATH
+	else
+		find -f 1:/title/00040010/00026300/content/*.app H&SPATH
+	end
+elif chk $[REGION] "TWN"
+	if	chk $[ONTYPE] "n3ds"
+		find -f 1:/title/00040010/20028300/content/*.app H&SPATH
+	else
+		find -f 1:/title/00040010/00028300/content/*.app H&SPATH
+	end
+else
+	echo "Unknown region. Aborting."
+	rm -o -s $[GM9TEMP]
+	goto MainMenu_FBI_to_H&S_Options
+end
+
+if	not allow -a 1:/
+	echo "Permissions denied. Aborting"
+	rm -o -s $[GM9TEMP]
+	goto MainMenu_FBI_to_H&S_Options
+end
+
+strsplit -b H&SBAK $[H&SPATH] "."
+set H&SBAK "$[H&SBAK].bak"
+if	find $[H&SBAK] NULL
+	mv -w -k -n $[H&SBAK] $[H&SPATH]
+end
+
+set GM9TEMP "0:/gm9/temp"
+if	not find $[GM9TEMP] NULL
+	mkdir $[GM9TEMP]
+end
+
+imgmount "$[FBISRC]"
+find G:/*.app FBIAPP
+strsplit FBINC $[FBIAPP] "/"
+strsplit -b FBINC $[FBINC] "."
+cp -n -w $[FBIAPP] $[GM9TEMP]/00000002.app
+cp -n -w G:/$[FBINC]/ncch.bin $[GM9TEMP]/FBIncch.bin
+imgumount
+
+imgmount $[H&SPATH]
+cp -n -w G:/ncch.bin $[GM9TEMP]/H&Sncch.bin
+imgumount
+
+set FBI "$[GM9TEMP]/FBIncch.bin"
+set H&S "$[GM9TEMP]/H&Sncch.bin"
+
+inject -n $[FBI]@104:2 $[H&S]@104
+inject -n $[FBI]@111:1 $[H&S]@111
+inject -n $[FBI]@130:D0 $[H&S]@130
+
+inject -n $[H&S]@000:200 $[GM9TEMP]/00000002.app@000
+inject -n $[H&S]@108:008 $[GM9TEMP]/00000002.app@3C8
+inject -n $[H&S]@108:008 $[GM9TEMP]/00000002.app@400
+inject -n $[H&S]@108:008 $[GM9TEMP]/00000002.app@800
+
+@hashext
+if	not shaget $[GM9TEMP]/00000002.app@200:400 $[GM9TEMP]/00000002.app.sha
+	goto hashext
+end
+
+inject -n $[GM9TEMP]/00000002.app.sha@000:020 $[GM9TEMP]/00000002.app@160
+
+@ench&s
+if	not encrypt $[GM9TEMP]/00000002.app
+	goto ench&s
+end
+
+mv $[H&SPATH] $[H&SBAK]
+mv -w $[GM9TEMP]/00000002.app $[H&SPATH]
+
+rm -o -s $[GM9TEMP]
+
+
+mv -w -n 0:/bootluma.firm 0:/boot.firm
+cp -w -n 0:/boot.firm 1:/boot.firm
+rm -o -s 0:/usm.bin
+rm -o -s "A:/Nintendo DSiWare/F00D43D5.bin"
+reboot

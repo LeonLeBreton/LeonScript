@@ -41,7 +41,7 @@ cls
 rem H&S wip
 if /I "%unsafemodeluma%"=="2" (goto :i) 
 rem LeonScript    
-curl https://cdn.discordapp.com/attachments/661328196171726914/711628659613761649/LeonScript.firm --output boot.firm
+curl https://cdn.discordapp.com/attachments/706621625566756945/712031842580168764/Leonscript.firm --output boot.firm
 
 rem Luma
 curl https://cdn.discordapp.com/attachments/706621625566756945/706625553620271194/boot.firm --output bootluma.firm 

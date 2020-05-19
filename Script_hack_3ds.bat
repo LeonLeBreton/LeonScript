@@ -174,9 +174,11 @@ echo 14. Une fois que vous voyez B9S install SUCCESS sur l'écran du haut, appuy
 if /I "%unsafemodeluma%"=="2" (goto :k) 
 echo 15. Un script va se lancer et installer FBI sur la console et nettoiera la sd
 echo Felicitations, vous avez totalement piraté votre console
+PAUSE
 goto :m
 :k
 echo Felicitations, vous avez réussi à installer B9S
+PAUSE
 goto :m
 :m
 set unsafemodeluma=

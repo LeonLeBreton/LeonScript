@@ -179,7 +179,6 @@ goto :m
 :k
 echo Felicitations, vous avez réussi à installer B9S
 PAUSE
-goto :m
 :m
 set unsafemodeluma=
 exit

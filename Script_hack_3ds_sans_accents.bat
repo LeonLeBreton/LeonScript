@@ -1,27 +1,41 @@
-echo off
+echo off 
+if NOT EXIST Script_hack_3ds.bat ( color C )
+if NOT EXIST Script_hack_3ds.bat ( cls )
+if NOT EXIST Script_hack_3ds.bat ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus ) 
+if NOT EXIST Script_hack_3ds.bat ( PAUSE )
+if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
 cls
 rem Merci de ne pas supprimer les credits
-echo Cree par LeonLeBreton
-echo Guide cree pour les consoles en 11.13.0-45E
-echo Quand vous etes pret, appuyez sur entrer pour lancer le telechargement
+echo Créé par LeonLeBreton
+echo Guide créé pour les consoles en 11.13.0-45E
+echo Quand vous etes pret, appuyez sur entrer pour lancer le téléchargement
 echo Le pc doit etre en 64 bits
 PAUSE
+
+rem Vérification de curl
+curl -O https://cdn.discordapp.com/attachments/706621625566756945/713155875065561198/test.txt
+cls
+if NOT EXIST test.txt ( color C ) 
+if NOT EXIST test.txt ( echo La dépendance CURL est manquante, merci de suivre ce tutoriel https://o7planning.org/fr/11617/installation-de-curl-sous-windows afin de l'installer et l'utiliser ) 
+if NOT EXIST test.txt ( PAUSE ) 
+if NOT EXIST test.txt ( exit ) 
+del test.txt 
 mkdir %appdata%\hack
 mkdir %appdata%\hack\cias
 mkdir %appdata%\hack\3ds
 cd %appdata%\hack\
 cls
-echo Telechargement des fichiers importants en cours
+echo Téléchargement des fichiers importants en cours
 :h
 set /p unsafemodeinstall=Quel type d'installation souhaitez-vous ? Normal (defaut): 1, Minimal : 2, En savoir plus : 3	: 
 if /I "%unsafemodeinstall%"=="3" (goto :g) 
-set /p unsafemodeluma="Souhaitez-vous faciliter le hack en remplacant H&S par FBI (et faire quelques optimisations) ? Oui (defaut): 1, Non : 2   : "
+set /p unsafemodeluma="Souhaitez-vous faciliter le hack en remplaçant H&S par FBI (et faire quelques optimisations) ? Oui (defaut): 1, Non : 2   : "
 if /I "%unsafemodeinstall%"=="1" (goto :e)
 if /I "%unsafemodeinstall%"=="2" (goto :f) 
 goto :e
 :g
 cls
-echo L'installation minimale telecharge les fichiers necessaires a la methode de piratage "unsafemode", Luma, FBI et Gm9 (avec le mega script)
+echo L'installation minimale télécharge les fichiers nécessaires a la méthode de piratage "unsafemode", Luma, FBI et Gm9 (avec le mega script)
 echo L'installation normale comprend les memes fichiers mais avec d'autres homebrews a installer avec FBI
 goto :h 
 :e
@@ -83,11 +97,11 @@ curl -O https://cdn.discordapp.com/attachments/706621625566756945/70662624066823
 move %appdata%\hack\GM9Megascript.gm9 %appdata%\hack\gm9\scripts\GM9Megascript.gm9
 
 
-echo Telechargement fini
+echo Téléchargement fini
 cls
 
 :a
-set /p unsafemodechoix=Possedez-vous le movable.sed propre a votre console ? (Oui=1, Non=2) : 
+set /p unsafemodechoix=Possédez-vous le movable.sed propre a votre console ? (Oui=1, Non=2) : 
 if /I "%unsafemodechoix%"=="1" (goto :c)
 if /I "%unsafemodechoix%"=="2" (goto :b)
 cls
@@ -96,53 +110,53 @@ goto :a
 rem Guide pour movable.sed
 :b
 cls
-echo Une page internet va s'ouvrir pour realiser le guide
+echo Une page internet va s'ouvrir pour réaliser le guide
 PAUSE
 start https://seedminer.hacks.guide/
 cls
-echo Recuperation du movable.sed
-echo Cette etape est trop compliquee (voire impossible) a faire en commande, par consequence il va falloir le faire manuellement
+echo Récupération du movable.sed
+echo Cette étape est trop compliquée (voire impossible) a faire en commande, par conséquence il va falloir le faire manuellement
 echo Voici le guide de 3ds.guide pour vous aider
-echo 1. Ouvrez https://seedminer.hacks.guide/ sur votre ordinateur (s'il n'est pas deja ouvert)
+echo 1. Ouvrez https://seedminer.hacks.guide/ sur votre ordinateur (s'il n'est pas déja ouvert)
 echo 2. Entrez le code ami de votre console (sans espaces ni tirets) dans le champ "Your friend code"
 echo 3. Collez le nom du dossier de votre console (qui fait 32 caracteres de long) dans le champ "Your ID0"
-echo 4. Completez le captcha "Je ne suis pas un robot"
-echo 5. Selectionnez "Go"
-echo 6. Lorsque demande, utilisez le bouton "Ajouter un ami" sur votre console pour ajouter le code ami de la 3DS bot
+echo 4. Complétez le captcha "Je ne suis pas un robot"
+echo 5. Sélectionnez "Go"
+echo 6. Lorsque demandé, utilisez le bouton "Ajouter un ami" sur votre console pour ajouter le code ami de la 3DS bot
 echo 7. Attendez que le site se mette a jour 
-echo 8. Une fois que le site aura traite vos informations, vous aurez le choix entre "Continuer" ou "Refaire le processus pour un autre appareil". Cliquez le bouton vert "Continuer"
-echo 9. Veuillez attendre que le reste du processus soit acheve
-echo 10. Une fois le processus termine, telechargez votre fichier movable.sed depuis le site
+echo 8. Une fois que le site aura traité vos informations, vous aurez le choix entre "Continuer" ou "Refaire le processus pour un autre appareil". Cliquez le bouton vert "Continuer"
+echo 9. Veuillez attendre que le reste du processus soit achevé
+echo 10. Une fois le processus terminé, téléchargez votre fichier movable.sed depuis le site
 goto :d
 :c
 cls
 :d 
-set /p unsafemode=Renseignez le chemin precis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) : 
+set /p unsafemode=Renseignez le chemin précis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) :
+copy %unsafemode% %appdata%\hack\movable.sed 
 cls
 rem Obtention du fichier pour bb3 
 echo Veuillez patienter, ce processus peut prendre du temps ...
-cp %unsafemode% %appdata%\hack\movable.sed 
 TADmuffin.exe movable.sed 
-rm -r F00D43D5
-rm TADmuffin.exe
-rm movable.sed
+rmdir /Q /S F00D43D5
+del TADmuffin.exe
+del movable.sed
 cls
-set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) que vous avez rentre dans le champ "Your ID0" : 
+set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) que vous avez rentré dans le champ "Your ID0" : 
 set /p unsafemodeid2=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) qui se situe apres l'ID0 : 
 mkdir "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 move F00D43D5.bin "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 :l
 cls
-echo Preparatifs finis, copie des fichiers du PC vers la SD
+echo Préparatifs finis, copie des fichiers du PC vers la SD
 fsutil fsinfo drives
-set /p unsafemodesd=Inserez et renseignez juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) : 
+set /p unsafemodesd=Insérez et renseignez juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) : 
 if /I "%unsafemodesd%"=="1" (goto :l)
-cp -r * %unsafemodesd%:\
-echo Fichier copie !
+copy -r * %unsafemodesd%:\
+echo Fichier copié !
 PAUSE
 cls
 rem nettoyage
-rm -r %appdata%\hack\
+rmdir /Q /S %appdata%\hack\
 set unsafemode=
 set unsafemodesd=
 set unsafemodeid=
@@ -151,29 +165,33 @@ set unsafemodechoix=
 set unsafemodeinstall=
 cls
 echo Installation du hack sur la console
-echo 1. Reinserez votre carte SD dans votre 3DS
-echo 2. Allumez a present votre 3DS
+echo 1. Réinserez votre carte SD dans votre 3DS
+echo 2. Allumez a présent votre 3DS
 echo 3. Lancez les Parametres de la console
-echo "4. Naviguez vers Gestion des donnees -> DSiWare"
-echo Attention : vos acces internet vont etre supprimes
+echo "4. Naviguez vers Gestion des données -> DSiWare"
+echo Attention : vos acces internet vont etre supprimés
 echo 5. Cliquez sur l'onglet Carte SD
-echo 6. Votre ecran du bas devrait clignoter en rouge, puis la console redemarrera sur le menu HOME quelques secondes plus tard. Cela signifie que le profil exploite a ete copie avec succes
-echo 7. Eteignez votre 3DS
-echo 8. Votre console toujours eteinte, maintenez enfonce les boutons suivants : (L) + (R) + (Haut sur la croix directionnelle) + (A), puis appuyez sur (Power) 
+echo 6. Votre écran du bas devrait clignoter en rouge, puis la console redémarrera sur le menu HOME quelques secondes plus tard. Cela signifie que le profil exploité a été copié avec succes
+echo 7. Éteignez votre 3DS
+echo 8. Votre console toujours éteinte, maintenez enfoncé les boutons suivants : (L) + (R) + (Haut sur la croix directionnelle) + (A), puis appuyez sur (Power) 
 echo 9. Appuyez sur "OK" pour accepter la mise a jour 
 echo 10. Appuyez sur "J'accepte" pour accepter les termes et conditions
-echo 11. La mise a jour finira par echouer, avec le code erreur 003-1099. Ne vous inquietez pas, c'est normal
-echo 12. Lorsque votre console vous demande "Parametrer la connexion Internet de la console ?", selectionnez "Parametrer"
-echo "13. Dans le menu suivant, accedez a Connexion 1 -> Modifier -> Page suivante (fleche de droite) -> Serveur proxy -> Parametres avances"
-echo 14. Une fois que vous voyez B9S install SUCCESS sur l'ecran du haut, appuyez sur n'importe quel bouton pour redemarrer
+echo 11. La mise a jour finira par échouer, avec le code erreur 003-1099. Ne vous inquiétez pas, c'est normal
+echo 12. Lorsque votre console vous demande "Paramétrer la connexion Internet de la console ?", sélectionnez "Paramétrer"
+echo "13. Dans le menu suivant, accédez a Connexion 1 -> Modifier -> Page suivante (fleche de droite) -> Serveur proxy -> Parametres avancés"
+echo 14. Une fois que vous voyez B9S install SUCCESS sur l'écran du haut, appuyez sur n'importe quel bouton pour redémarrer
 if /I "%unsafemodeluma%"=="2" (goto :k) 
 echo 15. Un script va se lancer et installer FBI sur la console et nettoiera la sd
-echo Felicitations, vous avez totalement pirate votre console, le programme va s'arreter
+echo Felicitations, vous avez totalement piraté votre console
 PAUSE
-set unsafemodeluma=
-exit 
+goto :m
 :k
-echo Felicitations, vous avez reussi a installer B9S, le programme va s'arreter
+echo Felicitations, vous avez réussi a installer B9S
 PAUSE
+:m
+cls 
+set /p unsafemodescript=Souhaitez-vous supprimer le script ? ( Oui : 1, Non : 2 )
+if /I "%unsafemodescript%"=="2" ( del Script_hack_3ds.bat )
+set unsafemodescript= 
 set unsafemodeluma=
 exit

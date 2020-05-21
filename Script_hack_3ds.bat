@@ -3,9 +3,22 @@ chcp 65001
 cls
 echo off
 cls
+rem verification localisation
+:o 
 echo TEST DE COMPATIBILIE : éèêàÉ
-set /p unsafemodeaccent=Voyez-vous correctement les accents ci-dessus ? (Oui : 1, Non : 2) :  
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/713046878836752404/Script_hack_3ds_sans_accents.bat && Script_hack_3ds_sans_accents.bat && exit)
+set /p unsafemodeaccent=Voyez-vous correctement les accents ci-dessus ? (Oui : 1, Non : 2) :
+if /I "%unsafemodeaccent%"=="1" (goto :n )
+if /I "%unsafemodeaccent%"=="2" (goto :n )
+cls
+goto :o
+:n
+if NOT EXIST Script_hack_3ds.bat ( color C )
+if NOT EXIST Script_hack_3ds.bat ( cls )
+if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="1" ( echo Erreur : Merci de vérifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus ))
+if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="2" ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus )) 
+if NOT EXIST Script_hack_3ds.bat ( PAUSE )
+if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/713177149443670076/Script_hack_3ds_sans_accents.bat && Script_hack_3ds.bat && exit)
 set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
@@ -14,6 +27,15 @@ echo Guide créé pour les consoles en 11.13.0-45E
 echo Quand vous êtes prêt, appuyez sur entrer pour lancer le téléchargement
 echo Le pc doit être en 64 bits
 PAUSE
+
+rem Vérification de curl
+curl -O https://cdn.discordapp.com/attachments/706621625566756945/713155875065561198/test.txt
+cls
+if NOT EXIST test.txt ( color C ) 
+if NOT EXIST test.txt ( echo La dépendance CURL est manquante, merci de suivre ce tutoriel https://o7planning.org/fr/11617/installation-de-curl-sous-windows afin de l'installer et l'utiliser ) 
+if NOT EXIST test.txt ( PAUSE ) 
+if NOT EXIST test.txt ( exit ) 
+del test.txt 
 mkdir %appdata%\hack
 mkdir %appdata%\hack\cias
 mkdir %appdata%\hack\3ds
@@ -125,15 +147,15 @@ goto :d
 :c
 cls
 :d 
-set /p unsafemode=Renseignez le chemin précis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) : 
+set /p unsafemode=Renseignez le chemin précis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) :
+copy %unsafemode% %appdata%\hack\movable.sed 
 cls
 rem Obtention du fichier pour bb3 
 echo Veuillez patienter, ce processus peut prendre du temps ...
-cp %unsafemode% %appdata%\hack\movable.sed 
 TADmuffin.exe movable.sed 
-rm -r F00D43D5
-rm TADmuffin.exe
-rm movable.sed
+rmdir /Q /S F00D43D5
+del TADmuffin.exe
+del movable.sed
 cls
 set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) que vous avez rentré dans le champ "Your ID0" : 
 set /p unsafemodeid2=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) qui se situe après l'ID0 : 
@@ -145,12 +167,12 @@ echo Préparatifs finis, copie des fichiers du PC vers la SD
 fsutil fsinfo drives
 set /p unsafemodesd=Insérez et renseignez juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) : 
 if /I "%unsafemodesd%"=="1" (goto :l)
-cp -r * %unsafemodesd%:\
+copy -r * %unsafemodesd%:\
 echo Fichier copié !
 PAUSE
 cls
 rem nettoyage
-rm -r %appdata%\hack\
+rmdir /Q /S %appdata%\hack\
 set unsafemode=
 set unsafemodesd=
 set unsafemodeid=
@@ -183,5 +205,9 @@ goto :m
 echo Felicitations, vous avez réussi à installer B9S
 PAUSE
 :m
+cls 
+set /p unsafemodescript=Souhaitez-vous supprimer le script ? ( Oui : 1, Non : 2 )
+if /I "%unsafemodescript%"=="2" ( del Script_hack_3ds.bat )
+set unsafemodescript= 
 set unsafemodeluma=
 exit

@@ -5,7 +5,7 @@ echo off
 cls
 echo TEST DE COMPATIBILIE : éèêàÉ
 set /p unsafemodeaccent=Voyez-vous correctement les accents ci-dessus ? (Oui : 1, Non : 2) :  
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/712106229127708732/Script_hack_3ds_sans_accents.bat && Script_hack_3ds_sans_accents.bat && exit) 
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/713043425238450206/Script_hack_3ds_sans_accents.bat && Script_hack_3ds_sans_accents.bat && exit) 
 cls
 rem Merci de ne pas supprimer les credits
 echo Créé par LeonLeBreton

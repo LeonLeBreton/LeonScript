@@ -61,9 +61,11 @@ curl -O https://cdn.discordapp.com/attachments/684847907274227755/70694227405504
 
 rem Telechargement des fichiers necessaires aux hack
 
-rem FBI
+rem cias
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/706630002413928538/FBI.cia
+curl -O https://cdn.discordapp.com/attachments/706621625566756945/713042413903544320/slotTool.cia
 move %appdata%\hack\FBI.cia %appdata%\hack\cias\FBI.cia
+move %appdata%\hack\SlotTools %appdata%\hack\cias\SlotTools.cia
 
 rem Homebrew Launcher
 curl -O https://smealum.github.io/ninjhax2/boot.3dsx

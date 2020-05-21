@@ -5,7 +5,8 @@ echo off
 cls
 echo TEST DE COMPATIBILIE : éèêàÉ
 set /p unsafemodeaccent=Voyez-vous correctement les accents ci-dessus ? (Oui : 1, Non : 2) :  
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/713043425238450206/Script_hack_3ds_sans_accents.bat && Script_hack_3ds_sans_accents.bat && exit) 
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/713046878836752404/Script_hack_3ds_sans_accents.bat && Script_hack_3ds_sans_accents.bat && exit)
+set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
 echo Créé par LeonLeBreton
@@ -72,7 +73,7 @@ rem cias
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/706630002413928538/FBI.cia
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/713042413903544320/slotTool.cia
 move %appdata%\hack\FBI.cia %appdata%\hack\cias\FBI.cia
-move %appdata%\hack\SlotTools %appdata%\hack\cias\SlotTools.cia
+move %appdata%\hack\slotTool.cia %appdata%\hack\cias\slotTool.cia
 
 rem Homebrew Launcher
 curl -O https://smealum.github.io/ninjhax2/boot.3dsx

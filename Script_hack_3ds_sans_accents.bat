@@ -15,7 +15,7 @@ echo Telechargement des fichiers importants en cours
 :h
 set /p unsafemodeinstall=Quel type d'installation souhaitez-vous ? Normal (defaut): 1, Minimal : 2, En savoir plus : 3	: 
 if /I "%unsafemodeinstall%"=="3" (goto :g) 
-set /p unsafemodeluma="Souhaitez-vous faciliter le hack en remplaçant H&S par FBI (et faire quelques optimisations) ? Oui (defaut): 1, Non : 2   : "
+set /p unsafemodeluma="Souhaitez-vous faciliter le hack en remplacant H&S par FBI (et faire quelques optimisations) ? Oui (defaut): 1, Non : 2   : "
 if /I "%unsafemodeinstall%"=="1" (goto :e)
 if /I "%unsafemodeinstall%"=="2" (goto :f) 
 goto :e
@@ -38,7 +38,7 @@ cd ..
 :f
 cls
 
-rem H&S wip
+rem H&S
 if /I "%unsafemodeluma%"=="2" (goto :i) 
 rem LeonScript    
 curl https://cdn.discordapp.com/attachments/706621625566756945/712031842580168764/Leonscript.firm --output boot.firm
@@ -65,7 +65,7 @@ rem cias
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/706630002413928538/FBI.cia
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/713042413903544320/slotTool.cia
 move %appdata%\hack\FBI.cia %appdata%\hack\cias\FBI.cia
-move %appdata%\hack\SlotTools %appdata%\hack\cias\SlotTools.cia
+move %appdata%\hack\slotTool.cia %appdata%\hack\cias\slotTool.cia
 
 rem Homebrew Launcher
 curl -O https://smealum.github.io/ninjhax2/boot.3dsx

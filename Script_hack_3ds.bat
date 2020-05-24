@@ -2,11 +2,12 @@
 chcp 65001 
 cls
 echo off
+title Leon Script
 cls
 rem verification localisation
 :o 
 echo TEST DE COMPATIBILIE : éèêàÉ
-set /p unsafemodeaccent=Voyez-vous correctement les accents ci-dessus ? (Oui : 1, Non : 2) :
+set /p unsafemodeaccent=Voyez-vous correctement les accents ci-dessus ? (Oui : 1, Non : 2) : 
 if /I "%unsafemodeaccent%"=="1" (goto :n )
 if /I "%unsafemodeaccent%"=="2" (goto :n )
 cls
@@ -18,11 +19,12 @@ if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="1" ( echo Erreur
 if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="2" ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus )) 
 if NOT EXIST Script_hack_3ds.bat ( PAUSE )
 if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl -O https://cdn.discordapp.com/attachments/706621625566756945/713177149443670076/Script_hack_3ds_sans_accents.bat && Script_hack_3ds.bat && exit)
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714140235294048276/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
 set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
 echo Créé par LeonLeBreton
+echo Remerciment à Luc_Ha et Reshiban
 echo Guide créé pour les consoles en 11.13.0-45E
 echo Quand vous êtes prêt, appuyez sur entrer pour lancer le téléchargement
 echo Le pc doit être en 64 bits
@@ -31,10 +33,14 @@ PAUSE
 rem Vérification de curl
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/713155875065561198/test.txt
 cls
-if NOT EXIST test.txt ( color C ) 
-if NOT EXIST test.txt ( echo La dépendance CURL est manquante, merci de suivre ce tutoriel https://o7planning.org/fr/11617/installation-de-curl-sous-windows afin de l'installer et l'utiliser ) 
-if NOT EXIST test.txt ( PAUSE ) 
-if NOT EXIST test.txt ( exit ) 
+if NOT EXIST test.txt ( goto :u ) ELSE ( goto :t )
+:u 
+color C
+curl -V
+if ERRORLEVEL 9009 ( cls && echo La dépendance CURL est manquante, merci de suivre ce tutoriel https://o7planning.org/fr/11617/installation-de-curl-sous-windows afin de l'installer et l'utiliser ) ELSE ( cls && echo Vérifier votre connexion internet et relancer le script )
+PAUSE 
+exit  
+:t 
 del test.txt 
 mkdir %appdata%\hack
 mkdir %appdata%\hack\cias
@@ -75,6 +81,10 @@ curl https://cdn.discordapp.com/attachments/706621625566756945/71203184258016876
 
 rem Luma
 curl https://cdn.discordapp.com/attachments/706621625566756945/706625553620271194/boot.firm --output bootluma.firm 
+
+rem Slot tool
+curl -O https://cdn.discordapp.com/attachments/706621625566756945/713042413903544320/slotTool.cia
+move %appdata%\hack\slotTool.cia %appdata%\hack\cias\slotTool.cia
 goto :j
 
 rem pas H&S
@@ -93,9 +103,7 @@ rem Telechargement des fichiers necessaires aux hack
 
 rem cias
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/706630002413928538/FBI.cia
-curl -O https://cdn.discordapp.com/attachments/706621625566756945/713042413903544320/slotTool.cia
 move %appdata%\hack\FBI.cia %appdata%\hack\cias\FBI.cia
-move %appdata%\hack\slotTool.cia %appdata%\hack\cias\slotTool.cia
 
 rem Homebrew Launcher
 curl -O https://smealum.github.io/ninjhax2/boot.3dsx
@@ -146,33 +154,41 @@ echo 10. Une fois le processus terminé, téléchargez votre fichier movable.sed
 goto :d
 :c
 cls
-:d 
+:d
 set /p unsafemode=Renseignez le chemin précis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) :
-copy %unsafemode% %appdata%\hack\movable.sed 
+copy %unsafemode% "%appdata%\hack\movable.sed"
 cls
 rem Obtention du fichier pour bb3 
 echo Veuillez patienter, ce processus peut prendre du temps ...
-TADmuffin.exe movable.sed 
+TADmuffin.exe movable.sed
+find F00D43D5.bin
+if ERRORLEVEL 1 ( cls && echo Erreur lors de la compilation. Merci de vérifier le movable.sed && goto :d )
 rmdir /Q /S F00D43D5
 del TADmuffin.exe
 del movable.sed
+:p
 cls
-set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) que vous avez rentré dans le champ "Your ID0" : 
-set /p unsafemodeid2=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) qui se situe après l'ID0 : 
+set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) que vous avez rentré dans le champ "Your ID0" :
+if /I "%unsafemodeid%"=="" (goto :p)
+:q
+set /p unsafemodeid2=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) qui se situe après l'ID0 :
+if /I "%unsafemodeid2%"=="" (cls && goto :q) 
 mkdir "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 move F00D43D5.bin "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 :l
 cls
 echo Préparatifs finis, copie des fichiers du PC vers la SD
+:r
 fsutil fsinfo drives
-set /p unsafemodesd=Insérez et renseignez juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) : 
+set /p unsafemodesd=Insérez et renseignez juste la lettre de la sd (par exemple : G ) (Pour actualiser les lecteurs, tapez 1) :
 if /I "%unsafemodesd%"=="1" (goto :l)
-copy -r * %unsafemodesd%:\
+xcopy /Y /E * %unsafemodesd%:\
+if ERRORLEVEL 1 ( cls && echo Mauvais répertoire ! Rappel : Il faut uniquement mettre la lettre && goto :r )  
 echo Fichier copié !
 PAUSE
 cls
 rem nettoyage
-rmdir /Q /S %appdata%\hack\
+rmdir /Q /S %appdata%\hack
 set unsafemode=
 set unsafemodesd=
 set unsafemodeid=
@@ -185,7 +201,6 @@ echo 1. Réinserez votre carte SD dans votre 3DS
 echo 2. Allumez à présent votre 3DS
 echo 3. Lancez les Paramètres de la console
 echo "4. Naviguez vers Gestion des données -> DSiWare"
-echo Attention : vos accès internet vont être supprimés
 echo 5. Cliquez sur l'onglet Carte SD
 echo 6. Votre écran du bas devrait clignoter en rouge, puis la console redémarrera sur le menu HOME quelques secondes plus tard. Cela signifie que le profil exploité a été copié avec succès
 echo 7. Éteignez votre 3DS
@@ -199,15 +214,17 @@ echo 14. Une fois que vous voyez B9S install SUCCESS sur l'écran du haut, appuy
 if /I "%unsafemodeluma%"=="2" (goto :k) 
 echo 15. Un script va se lancer et installer FBI sur la console et nettoiera la sd
 echo Felicitations, vous avez totalement piraté votre console
+echo Pour rétablir les paramètres internet : Lancer FBI (il se trouve à la place de H&S) et installer tous les cias. Après avoir ouvert tous les cadeaux, lancer SlotTool. Selectionner ensuite la 2nd ligne et appuyer sur A.
 PAUSE
 goto :m
 :k
 echo Felicitations, vous avez réussi à installer B9S
+echo "Pour rétablir les paramètres internet : Lancez les Paramètres de la console, puis naviguez vers Gestion des données -> DSiWare et enfin cliquer sur l'onglet Carte SD. Votre écran du bas devrait clignoter en vert. 
 PAUSE
 :m
 cls 
-set /p unsafemodescript=Souhaitez-vous supprimer le script ? ( Oui : 1, Non : 2 )
-if /I "%unsafemodescript%"=="2" ( del Script_hack_3ds.bat )
+set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 )
+if /I "%unsafemodescript%"=="1" ( del Script_hack_3ds.bat )
 set unsafemodescript= 
 set unsafemodeluma=
 exit

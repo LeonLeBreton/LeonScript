@@ -19,7 +19,7 @@ if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="1" ( echo Erreur
 if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="2" ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus )) 
 if NOT EXIST Script_hack_3ds.bat ( PAUSE )
 if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714140235294048276/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714172452581671023/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
 set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
@@ -157,6 +157,7 @@ cls
 :d
 set /p unsafemode=Renseignez le chemin précis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) :
 copy %unsafemode% "%appdata%\hack\movable.sed"
+if ERRORLEVEL 1 ( cls && goto :d )
 cls
 rem Obtention du fichier pour bb3 
 echo Veuillez patienter, ce processus peut prendre du temps ...
@@ -223,7 +224,7 @@ echo "Pour rétablir les paramètres internet : Lancez les Paramètres de la con
 PAUSE
 :m
 cls 
-set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 )
+set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 ) : 
 if /I "%unsafemodescript%"=="1" ( del Script_hack_3ds.bat )
 set unsafemodescript= 
 set unsafemodeluma=

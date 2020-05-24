@@ -143,6 +143,7 @@ cls
 :d
 set /p unsafemode=Renseignez le chemin precis du fichier movable.sed (Faites attention, un mauvais fichier va produire une erreur) :
 copy %unsafemode% "%appdata%\hack\movable.sed"
+if ERRORLEVEL 1 ( cls && goto :d )
 cls
 rem Obtention du fichier pour bb3 
 echo Veuillez patienter, ce processus peut prendre du temps ...
@@ -209,7 +210,7 @@ echo "Pour retablir les parametres internet : Lancez les Parametres de la consol
 PAUSE
 :m
 cls 
-set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 )
+set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 ) : 
 if /I "%unsafemodescript%"=="1" ( del Script_hack_3ds.bat )
 set unsafemodescript= 
 set unsafemodeluma=

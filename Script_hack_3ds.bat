@@ -19,7 +19,7 @@ if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="1" ( echo Erreur
 if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="2" ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus )) 
 if NOT EXIST Script_hack_3ds.bat ( PAUSE )
 if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714172452581671023/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714250508247760986/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
 set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
@@ -41,7 +41,8 @@ if ERRORLEVEL 9009 ( cls && echo La dépendance CURL est manquante, merci de sui
 PAUSE 
 exit  
 :t 
-del test.txt 
+del test.txt
+set unsafemodescriptlocal=%CD%
 mkdir %appdata%\hack
 mkdir %appdata%\hack\cias
 mkdir %appdata%\hack\3ds
@@ -215,17 +216,19 @@ echo 14. Une fois que vous voyez B9S install SUCCESS sur l'écran du haut, appuy
 if /I "%unsafemodeluma%"=="2" (goto :k) 
 echo 15. Un script va se lancer et installer FBI sur la console et nettoiera la sd
 echo Felicitations, vous avez totalement piraté votre console
+echo.
 echo Pour rétablir les paramètres internet : Lancer FBI (il se trouve à la place de H&S) et installer tous les cias. Après avoir ouvert tous les cadeaux, lancer SlotTool. Selectionner ensuite la 2nd ligne et appuyer sur A.
 PAUSE
 goto :m
 :k
 echo Felicitations, vous avez réussi à installer B9S
+echo.
 echo "Pour rétablir les paramètres internet : Lancez les Paramètres de la console, puis naviguez vers Gestion des données -> DSiWare et enfin cliquer sur l'onglet Carte SD. Votre écran du bas devrait clignoter en vert. 
 PAUSE
 :m
 cls 
 set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 ) : 
-if /I "%unsafemodescript%"=="1" ( del Script_hack_3ds.bat )
+if /I "%unsafemodescript%"=="1" cd %unsafemodescriptlocal% && del Script_hack_3ds.bat
 set unsafemodescript= 
 set unsafemodeluma=
 exit

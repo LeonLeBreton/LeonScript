@@ -28,6 +28,7 @@ PAUSE
 exit  
 :t 
 del test.txt 
+set unsafemodescriptlocal=%CD%
 mkdir %appdata%\hack
 mkdir %appdata%\hack\cias
 mkdir %appdata%\hack\3ds
@@ -201,17 +202,19 @@ echo 14. Une fois que vous voyez B9S install SUCCESS sur l'ecran du haut, appuye
 if /I "%unsafemodeluma%"=="2" (goto :k) 
 echo 15. Un script va se lancer et installer FBI sur la console et nettoiera la sd
 echo Felicitations, vous avez totalement pirate votre console
+echo.
 echo Pour retablir les parametres internet : Lancer FBI (il se trouve a la place de H&S) et installer tous les cias. Apres avoir ouvert tous les cadeaux, lancer SlotTool. Selectionner ensuite la 2nd ligne et appuyer sur A.
 PAUSE
 goto :m
 :k
 echo Felicitations, vous avez reussi a installer B9S
+echo.
 echo "Pour retablir les parametres internet : Lancez les Parametres de la console, puis naviguez vers Gestion des donnees -> DSiWare et enfin cliquer sur l'onglet Carte SD. Votre ecran du bas devrait clignoter en vert. 
 PAUSE
 :m
 cls 
 set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( Oui : 1, Non : 2 ) : 
-if /I "%unsafemodescript%"=="1" ( del Script_hack_3ds.bat )
+if /I "%unsafemodescript%"=="1" cd %unsafemodescriptlocal% && del Script_hack_3ds.bat
 set unsafemodescript= 
 set unsafemodeluma=
 exit

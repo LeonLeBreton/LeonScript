@@ -19,7 +19,7 @@ if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="1" ( echo Erreur
 if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="2" ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus )) 
 if NOT EXIST Script_hack_3ds.bat ( PAUSE )
 if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714250508247760986/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714531331526361168/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
 set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
@@ -31,6 +31,7 @@ echo Le pc doit être en 64 bits
 PAUSE
 
 rem Vérification de curl
+:s 
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/713155875065561198/test.txt
 cls
 if NOT EXIST test.txt ( goto :u ) ELSE ( goto :t )
@@ -48,6 +49,14 @@ mkdir %appdata%\hack\cias
 mkdir %appdata%\hack\3ds
 cd %appdata%\hack\
 cls
+rem debugger (mettez rem pour l'activer) :
+goto :s rem le rem est à mettre sur cette commande 
+cls
+:y
+set /p unsafemodedebug=Debug mode activé ! Que voulez vous faire ? : 
+%unsafemodedebug%
+goto :y 
+
 echo Téléchargement des fichiers importants en cours
 :h
 set /p unsafemodeinstall=Quel type d'installation souhaitez-vous ? Normal (defaut): 1, Minimal : 2, En savoir plus : 3	: 
@@ -170,11 +179,29 @@ del TADmuffin.exe
 del movable.sed
 :p
 cls
+:v
 set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) que vous avez rentré dans le champ "Your ID0" :
 if /I "%unsafemodeid%"=="" (goto :p)
+expr length %unsafemodeid% > lenght.txt
+set /P unsafemodeidtest=< lenght.txt
+if "%unsafemodeidtest%"=="32" (goto :q)
+cls
+echo L'ID0 entrée n'est pas valide (il ne fait pas 32 caractères)
+goto :v
 :q
+cls
+:w 
 set /p unsafemodeid2=Collez ici le nom du dossier de votre console (qui fait 32 caractères de long) qui se situe après l'ID0 :
 if /I "%unsafemodeid2%"=="" (cls && goto :q) 
+expr length %unsafemodeid2% > lenght.txt
+set /P unsafemodeidtest=< lenght.txt
+if "%unsafemodeidtest%"=="32" (goto :x)
+cls
+echo L'ID1 entrée n'est pas valide (il ne fait pas 32 caractères)
+goto :w 
+:x 
+del lenght.txt
+set unsafemodeidtest=
 mkdir "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 move F00D43D5.bin "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 :l
@@ -231,4 +258,5 @@ set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( O
 if /I "%unsafemodescript%"=="1" cd %unsafemodescriptlocal% && del Script_hack_3ds.bat
 set unsafemodescript= 
 set unsafemodeluma=
+set unsafemodedebug= 
 exit

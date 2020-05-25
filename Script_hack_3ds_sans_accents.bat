@@ -17,6 +17,7 @@ echo Le pc doit etre en 64 bits
 PAUSE
 
 rem Verification de curl
+:s 
 curl -O https://cdn.discordapp.com/attachments/706621625566756945/713155875065561198/test.txt
 cls
 if NOT EXIST test.txt ( goto :u ) ELSE ( goto :t )
@@ -27,13 +28,21 @@ if ERRORLEVEL 9009 ( cls && echo La dependance CURL est manquante, merci de suiv
 PAUSE 
 exit  
 :t 
-del test.txt 
+del test.txt
 set unsafemodescriptlocal=%CD%
 mkdir %appdata%\hack
 mkdir %appdata%\hack\cias
 mkdir %appdata%\hack\3ds
 cd %appdata%\hack\
 cls
+rem debugger (mettez rem pour l'activer) :
+goto :s rem le rem est a mettre sur cette commande 
+cls
+:y
+set /p unsafemodedebug=Debug mode active ! Que voulez vous faire ? : 
+%unsafemodedebug%
+goto :y 
+
 echo Telechargement des fichiers importants en cours
 :h
 set /p unsafemodeinstall=Quel type d'installation souhaitez-vous ? Normal (defaut): 1, Minimal : 2, En savoir plus : 3	: 
@@ -156,11 +165,29 @@ del TADmuffin.exe
 del movable.sed
 :p
 cls
+:v
 set /p unsafemodeid=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) que vous avez rentre dans le champ "Your ID0" :
 if /I "%unsafemodeid%"=="" (goto :p)
+expr length %unsafemodeid% > lenght.txt
+set /P unsafemodeidtest=< lenght.txt
+if "%unsafemodeidtest%"=="32" (goto :q)
+cls
+echo L'ID0 entree n'est pas valide (il ne fait pas 32 caracteres)
+goto :v
 :q
+cls
+:w 
 set /p unsafemodeid2=Collez ici le nom du dossier de votre console (qui fait 32 caracteres de long) qui se situe apres l'ID0 :
 if /I "%unsafemodeid2%"=="" (cls && goto :q) 
+expr length %unsafemodeid2% > lenght.txt
+set /P unsafemodeidtest=< lenght.txt
+if "%unsafemodeidtest%"=="32" (goto :x)
+cls
+echo L'ID1 entree n'est pas valide (il ne fait pas 32 caracteres)
+goto :w 
+:x 
+del lenght.txt
+set unsafemodeidtest=
 mkdir "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 move F00D43D5.bin "Nintendo 3ds\%unsafemodeid%\%unsafemodeid2%\Nintendo DSiWare"
 :l
@@ -217,4 +244,5 @@ set /p unsafemodescript=Souhaitez-vous supprimer le script de l'ordinateur ? ( O
 if /I "%unsafemodescript%"=="1" cd %unsafemodescriptlocal% && del Script_hack_3ds.bat
 set unsafemodescript= 
 set unsafemodeluma=
+set unsafemodedebug= 
 exit

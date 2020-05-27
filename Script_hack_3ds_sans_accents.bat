@@ -36,13 +36,14 @@ mkdir %appdata%\hack\3ds
 cd %appdata%\hack\
 cls
 rem debugger (mettez rem pour l'activer) :
-goto :s rem le rem est a mettre sur cette commande 
+goto :z rem le rem est a mettre sur cette commande 
 cls
 :y
 set /p unsafemodedebug=Debug mode active ! Que voulez vous faire ? : 
 %unsafemodedebug%
 goto :y 
 
+:z 
 echo Telechargement des fichiers importants en cours
 :h
 set /p unsafemodeinstall=Quel type d'installation souhaitez-vous ? Normal (defaut): 1, Minimal : 2, En savoir plus : 3	: 

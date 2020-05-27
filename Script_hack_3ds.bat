@@ -19,7 +19,7 @@ if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="1" ( echo Erreur
 if NOT EXIST Script_hack_3ds.bat ( if /I "%unsafemodeaccent%"=="2" ( echo Erreur : Merci de verifier si le fichier s'appelle " Script_hack_3ds.bat " et de le lancer en double cliquant dessus )) 
 if NOT EXIST Script_hack_3ds.bat ( PAUSE )
 if NOT EXIST Script_hack_3ds.bat ( EXIT ) 
-if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714531331526361168/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
+if /I "%unsafemodeaccent%"=="2" (set unsafemodeaccent= && curl https://cdn.discordapp.com/attachments/706621625566756945/714996012791496704/Script_hack_3ds_sans_accents.bat --output Script_hack_3ds.bat && Script_hack_3ds.bat && exit)
 set unsafemodeaccent=
 cls
 rem Merci de ne pas supprimer les credits
@@ -50,13 +50,14 @@ mkdir %appdata%\hack\3ds
 cd %appdata%\hack\
 cls
 rem debugger (mettez rem pour l'activer) :
-goto :s rem le rem est à mettre sur cette commande 
+goto :z rem le rem est à mettre sur cette commande 
 cls
 :y
 set /p unsafemodedebug=Debug mode activé ! Que voulez vous faire ? : 
 %unsafemodedebug%
 goto :y 
 
+:z 
 echo Téléchargement des fichiers importants en cours
 :h
 set /p unsafemodeinstall=Quel type d'installation souhaitez-vous ? Normal (defaut): 1, Minimal : 2, En savoir plus : 3	: 
